@@ -43,11 +43,10 @@ struct SongContyroller:RouteCollection{
         
     }
     
-    
     // DELETE Request /songs/id
     func delete(req: Request) throws -> EventLoopFuture<HTTPStatus> {
          Song.find(req.parameters.get("songID"), on: req.db)
-            .unwrap(or: Abort(.notFound))
+            .unwrap(or: Abort(.notFound,reason: "Name must not be empty."))
             .flatMap {$0.delete(on: req.db)}
             .transform(to: .ok)
     }
