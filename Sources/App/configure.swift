@@ -28,6 +28,8 @@ public func configure(_ app: Application) throws {
     try app.autoMigrate().wait()
     if app.environment == .development{
         try app.autoMigrate().wait()
+        
+        
     }
     // register routes
     try routes(app)
